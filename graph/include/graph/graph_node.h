@@ -1,3 +1,4 @@
+#include <ros/ros.h>
 #include <vector>
 #include <algorithm>
 #include <Eigen/Dense>
@@ -17,18 +18,20 @@ class Graph
 {
   
   public:
-    Graph() {}
+    Graph() {ROS_INFO("Graph Created");}
     VertexList vertices;
     EdgeList edges;
 
     void addVertex(Vertex v)
     {
       vertices.push_back(v);
+      ROS_INFO("Vertex added ");
     }
 
     void addEdge(Vertex src, Vertex dst)
     {
       edges.push_back(Edge(src,dst));
+      ROS_INFO("Edge added ");
     }
 
     bool hasVertex(Vertex v)

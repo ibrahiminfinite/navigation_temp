@@ -9,7 +9,7 @@ Vector3 sampler::sample_state(Vector3 minvals, Vector3 maxvals)
     {
         sample(i)=std::uniform_real_distribution<float>(minvals(i),maxvals(i))(generator);
     }
-    std::cout<<"Sample State Pass\n";
+    ROS_INFO("Sample State Pass");
     return sample;
 }
 
@@ -21,5 +21,5 @@ Vector3 sampler::sample_state_n(Vector3 minvals, Vector3 maxvals, int num_sample
     {
         samples.push_back(sampler::sample_state(minvals, maxvals));
     }
-    std::cout<<"Sample State N Pass\n";
+    ROS_INFO("Sample State N Pass");
 }

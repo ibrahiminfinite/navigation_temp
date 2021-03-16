@@ -13,7 +13,11 @@ int main()
 
     //Graph Testing
     auto g = graph::Graph();
-    g.addVertex(Vector3(0.0f,0.0f,0.0f));
-
+    auto v1 = Vector3(0.0f,0.0f,0.0f);
+    auto v2 = Vector3(3.0f,3.0f,3.0f);
+    g.addVertex(v1);
+    g.addVertex(v2);
+    g.addEdge(v1, v2);
+    std::cout<<g.hasVertex(v1)<<"\n";
     return 0;
 }
