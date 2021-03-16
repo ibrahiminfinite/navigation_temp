@@ -11,45 +11,27 @@ typedef std::pair<Vertex, Vertex> Edge;
 typedef std::vector<Edge> EdgeList;
 
 
-namespace graph
+namespace rrgraph
 {
 
 class Graph
 {
   
   public:
-    Graph() {ROS_INFO("Graph Created");}
+    Graph();
     VertexList vertices;
     EdgeList edges;
 
-    void addVertex(Vertex v)
-    {
-      vertices.push_back(v);
-      ROS_INFO("Vertex added ");
-    }
+    void addVertex(Vertex v);
 
-    void addEdge(Vertex src, Vertex dst)
-    {
-      edges.push_back(Edge(src,dst));
-      ROS_INFO("Edge added ");
-    }
+    void addEdge(Vertex src, Vertex dst);
 
-    bool hasVertex(Vertex v)
-    {
-      return std::find(vertices.begin(), vertices.end(), v) != vertices.end();
-    }
+    bool hasVertex(Vertex v);
 
     //returns the number of vertices
-    int getNumVertices()
-    {
-      return vertices.size();
-    }
+    int getNumVertices();
 
-    void clearGraph()
-    {
-      vertices.clear();
-      edges.clear();
-    }
+    void clearGraph();
 
 };
 

@@ -3,18 +3,19 @@
 void clear_tree()
 {
     // TODO : clear the kd_tree as well
-    g.clearGraph();
+    rrt::g.clearGraph();
 }
 
 
-Vector3 random_state(Vector3 minvals, Vector3 maxvals)
+Vector3 rrt::random_state(Vector3 minvals, Vector3 maxvals)
 {
+    ROS_INFO("RRT : Random State");
     // minvals and maxvals are of the form (x_min, y_min, z_min) and (x_max, y_max, z_max) respectively.
     return sampler::sample_state(minvals, maxvals);
 }
 
 
-Vector3 nearest_neighbour(Vector3 x_rand)
+Vector3 rrt::nearest_neighbour(Vector3 x_rand)
 {
     double pos[3];
     auto res = kd_nearest_range3f(kd,x_rand(0), x_rand(1), x_rand(2), 10);
@@ -24,7 +25,7 @@ Vector3 nearest_neighbour(Vector3 x_rand)
     return Vector3(pos[0], pos[1], pos[2]);
 
 }
-Vector3Array select_node(const Vector3 mins, const Vector3 maxs)
+Vector3Array rrt::select_node(const Vector3 mins, const Vector3 maxs)
 {
     Vector3Array res;
     auto x_rand = random_state(mins, maxs);
@@ -37,7 +38,7 @@ Vector3Array select_node(const Vector3 mins, const Vector3 maxs)
 }
 
 
-Vector3 new_node(Vector3 x_rand, Vector3 x_near)
+Vector3 rrt::new_node(Vector3 x_rand, Vector3 x_near)
 {
     bool reachable = false;
 
@@ -58,7 +59,7 @@ Vector3 new_node(Vector3 x_rand, Vector3 x_near)
 }
 
 
-void extend(Vector3 x_rand, Vector3 x_near)
+void rrt::extend(Vector3 x_rand, Vector3 x_near)
 {
     Vector3 x_new = new_node(x_rand, x_near);
     // TODO : add conectivity checks here
@@ -71,15 +72,16 @@ void extend(Vector3 x_rand, Vector3 x_near)
 
 
 
-void init_rrt(Vector3 x_init)
+void rrt::init_rrt(Vector3 x_init)
 {
+    ROS_INFO("RRT : Init Begin");
     assert(kd_insert3(kd, x_init(0), x_init(1), x_init(2), 0) == 0);
     g.addVertex(x_init); // any other attributes of the node can be added here
     ROS_INFO("RRT : Initialized");
 }
 
 
-void step_rrt(Vector3 mins, Vector3 maxs)
+void rrt::step_rrt(Vector3 mins, Vector3 maxs)
 {
     ROS_INFO("RRT : Selecting node");
     Vector3Array res_nodes = select_node(mins, maxs);

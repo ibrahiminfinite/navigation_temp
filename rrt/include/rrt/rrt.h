@@ -8,11 +8,16 @@
 #include "kdtree/kdtree.h"
 #include "graph/graph_node.h"
 
-auto kd = kd_create(3);
-auto g = graph::Graph();
+
+
 
 namespace rrt
 {
+
+rrgraph::Graph g = rrgraph::Graph();
+kdtree *kd = kd_create(3);
+
+
 // Returns a random state x_rand
 Vector3 random_state(Vector3 minvals, Vector3 maxvals);
 

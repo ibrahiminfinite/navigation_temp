@@ -25,6 +25,8 @@ std::random_device device; // Random device for random generator
 Vector3 sample;
 Vector3 current_pos;
 Vector3 bound_offsets;
+std::mt19937 generator(device());
+std::vector<std::uniform_real_distribution<float>> uniform_pds;
 
 /**
  * Samples within the bounding box set in the config

@@ -12,8 +12,6 @@
   <build_depend>roscpp</build_depend>
   <build_export_depend>roscpp</build_export_depend>
   <exec_depend>roscpp</exec_depend>
-  <depend>sampler</depend>
-  <depend>graph</depend>
-  <!-- <depend>rrt</depend> -->
+  <depend>rrt</depend>
 
 </package>
