@@ -1,23 +1,27 @@
 #include <ros/ros.h>
-#include "sampler/sampler_node.h"
-#include "graph/graph_node.h"
-
+#include "rrt/rrt.h"
+#include <ros/console.h>
 
 int main()
 {
-    
-    // Sampler Testing
-    sampler::sample_state(Vector3(0.0f,0.0f,0.0f), Vector3(0.0f,0.0f,0.0f));
-    sampler::sample_state_n(Vector3(-10.0f,-10.0f,-10.0f), Vector3(10.0f,10.0f,10.0f), 2);
+
+    // if (ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug))
+    // {
+    //     ros::console::notifyLoggerLevelsChanged();
+    // }
 
 
     //Graph Testing
-    auto g = graph::Graph();
-    auto v1 = Vector3(0.0f,0.0f,0.0f);
-    auto v2 = Vector3(3.0f,3.0f,3.0f);
-    g.addVertex(v1);
-    g.addVertex(v2);
-    g.addEdge(v1, v2);
-    std::cout<<g.hasVertex(v1)<<"\n";
+    auto v1 = Vector3(-10.0f,-10.0f,-10.0f);
+    auto v2 = Vector3(10.0f,10.0f,10.0f);
+
+
+    // //RRT Testing
+    
+    rrt::random_state(v1, v2);
+    rrt::init_rrt(v1);
+    for (int i = 0; i < 50; i++)
+        rrt::step_rrt(v1, v2);
     return 0;
 }
+
