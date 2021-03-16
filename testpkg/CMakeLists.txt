@@ -6,6 +6,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sampler
   graph
+  kdtree
+  rrt
 )
 
 # Geenerated executable will not be linked without this
