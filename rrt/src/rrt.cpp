@@ -23,18 +23,20 @@ Vector3 rrt::nearest_neighbour(Vector3 x_rand)
 {
     double pos[3];
     auto res = kd_nearest_range3f(kd,x_rand(0), x_rand(1), x_rand(2), 10);
-    ROS_INFO("KDTree : RESULT");
+    ROS_INFO("KDTree : Result");
     if (kd_res_size(res) > 1)
     {
-        kd_res_next( res ); // taking only 1 nearest neighbour returns the same point if the point 
-    // is already in the vertice set
+        // taking only 1 nearest neighbour returns the same point if the point 
+        // is already in the vertice set
+        kd_res_next( res ); 
         auto pch = (char*)kd_res_item( res, pos );
+        ROS_INFO("KDTree : Next Result");
     }
     else
     {
         auto pch = (char*)kd_res_item( res, pos );
     }
-    ROS_INFO("KDTree : NEXT RESULT");
+    
     
     return Vector3(pos[0], pos[1], pos[2]);
 

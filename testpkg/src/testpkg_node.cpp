@@ -18,9 +18,10 @@ int main()
 
     // //RRT Testing
     
-    std::cout<<rrt::random_state(v1, v2)<<"\n";
+    rrt::random_state(v1, v2);
     rrt::init_rrt(v1);
-    rrt::step_rrt(v1, v2);
+    for (int i = 0; i < 50; i++)
+        rrt::step_rrt(v1, v2);
     return 0;
 }
 
