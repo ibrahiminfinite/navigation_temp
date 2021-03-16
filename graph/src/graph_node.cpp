@@ -2,21 +2,21 @@
 
   rrgraph::Graph::Graph()
   {
-    ROS_INFO("Graph Created");
+    ROS_INFO("Graph : Graph Created");
   }
 
 
   void rrgraph::Graph::addVertex(Vertex v)
   {
     vertices.push_back(v);
-    ROS_INFO("Vertex added ");
+    ROS_INFO("Graph : Vertex added ");
   }
 
 
   void rrgraph::Graph::addEdge(Vertex src, Vertex dst)
   {
     edges.push_back(Edge(src,dst));
-    ROS_INFO("Edge added ");
+    ROS_INFO("Graph : Edge added ");
   }
 
   bool rrgraph::Graph::hasVertex(Vertex v)

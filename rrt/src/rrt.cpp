@@ -1,9 +1,13 @@
 #include "rrt/rrt.h"
+#include <ros/console.h>
+
+rrgraph::Graph g = rrgraph::Graph();
+kdtree *kd = kd_create(3);
 
 void clear_tree()
 {
     // TODO : clear the kd_tree as well
-    rrt::g.clearGraph();
+    // rrt::g.clearGraph();
 }
 
 
@@ -19,9 +23,19 @@ Vector3 rrt::nearest_neighbour(Vector3 x_rand)
 {
     double pos[3];
     auto res = kd_nearest_range3f(kd,x_rand(0), x_rand(1), x_rand(2), 10);
-    kd_res_next( res ); // taking only 1 nearest neighbour returns the same point if the point 
+    ROS_INFO("KDTree : RESULT");
+    if (kd_res_size(res) > 1)
+    {
+        kd_res_next( res ); // taking only 1 nearest neighbour returns the same point if the point 
     // is already in the vertice set
-    auto pch = (char*)kd_res_item( res, pos );
+        auto pch = (char*)kd_res_item( res, pos );
+    }
+    else
+    {
+        auto pch = (char*)kd_res_item( res, pos );
+    }
+    ROS_INFO("KDTree : NEXT RESULT");
+    
     return Vector3(pos[0], pos[1], pos[2]);
 
 }
@@ -29,9 +43,9 @@ Vector3Array rrt::select_node(const Vector3 mins, const Vector3 maxs)
 {
     Vector3Array res;
     auto x_rand = random_state(mins, maxs);
-    std::cout<<"Random Sample Obtained \n";
+    ROS_INFO("RRT : Random Sample Obtained");
     auto x_near = nearest_neighbour(x_rand);
-    std::cout<<"Nearest Neighbour Obtained \n";
+    ROS_INFO("RRT : Nearest Neighbour Obtained");
     res.push_back(x_rand);
     res.push_back(x_near);
     return res;
