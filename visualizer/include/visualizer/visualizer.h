@@ -7,8 +7,9 @@
 #include <boost/foreach.hpp>
 #include <visualization_msgs/Marker.h>
 
-typedef std::vector<Eigen::Vector3f> Vertices;
 typedef Eigen::Vector3f Vertex;
+typedef std::vector<Vertex> Vertices;
+
 typedef std::pair<Vertex, Vertex> Edge;
 typedef std::vector<Edge> Edges;
 
@@ -25,7 +26,7 @@ namespace visualizer
 
         public:
 
-            Visualizer();
+            Visualizer(const ros::NodeHandle& nh);
             void publish_points(Vertices samples);
             void publish_graph(Vertices vertices, Edges edges);
 

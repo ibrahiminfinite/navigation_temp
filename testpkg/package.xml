@@ -13,5 +13,6 @@
   <build_export_depend>roscpp</build_export_depend>
   <exec_depend>roscpp</exec_depend>
   <depend>rrt</depend>
+  <depend>visualizer</depend>
 
 </package>

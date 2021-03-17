@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   graph
   kdtree
   rrt
+  visualizer
 )
 
 # Geenerated executable will not be linked without this

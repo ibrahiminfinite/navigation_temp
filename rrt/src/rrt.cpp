@@ -4,10 +4,22 @@
 rrgraph::Graph g = rrgraph::Graph();
 kdtree *kd = kd_create(3);
 
-void clear_tree()
+
+Vector3Array rrt::get_vertices()
+{
+    return g.vertices;
+}
+
+
+std::vector<std::pair<Vector3, Vector3>> rrt::get_edges()
+{
+    return g.edges;
+}
+
+void rrt::clear_tree()
 {
     // TODO : clear the kd_tree as well
-    // rrt::g.clearGraph();
+    g.clearGraph();
 }
 
 
@@ -44,9 +56,9 @@ Vector3 rrt::nearest_neighbour(Vector3 x_rand)
 Vector3Array rrt::select_node(const Vector3 mins, const Vector3 maxs)
 {
     Vector3Array res;
-    auto x_rand = random_state(mins, maxs);
+    Vector3 x_rand = random_state(mins, maxs);
     ROS_INFO("RRT : Random Sample Obtained");
-    auto x_near = nearest_neighbour(x_rand);
+    Vector3 x_near = nearest_neighbour(x_rand);
     ROS_INFO("RRT : Nearest Neighbour Obtained");
     res.push_back(x_rand);
     res.push_back(x_near);
