@@ -5,6 +5,7 @@ Vector3 sampler::sample_state(Vector3 minvals, Vector3 maxvals)
     
     for(int i = 0; i < current_pos.size(); i++)
     {
+        // does this create a new distribution object every time ?
         sample(i)=std::uniform_real_distribution<float>(minvals(i),maxvals(i))(generator);
     }
     ROS_INFO("Sampler : Samping random state");

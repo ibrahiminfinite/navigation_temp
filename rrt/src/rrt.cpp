@@ -34,25 +34,29 @@ Vector3 rrt::random_state(Vector3 minvals, Vector3 maxvals)
 Vector3 rrt::nearest_neighbour(Vector3 x_rand)
 {
     double pos[3];
+    //This needs to be freed.
     auto res = kd_nearest_range3f(kd,x_rand(0), x_rand(1), x_rand(2), 10);
     ROS_INFO("KDTree : Result");
     if (kd_res_size(res) > 1)
     {
         // taking only 1 nearest neighbour returns the same point if the point 
         // is already in the vertice set
-        kd_res_next( res ); 
+        kd_res_next(res); 
         auto pch = (char*)kd_res_item( res, pos );
+        kd_res_free(res);
         ROS_INFO("KDTree : Next Result");
     }
     else
     {
         auto pch = (char*)kd_res_item( res, pos );
+        kd_res_free(res);
     }
     
     
     return Vector3(pos[0], pos[1], pos[2]);
 
 }
+
 Vector3Array rrt::select_node(const Vector3 mins, const Vector3 maxs)
 {
     Vector3Array res;
@@ -93,6 +97,7 @@ void rrt::extend(Vector3 x_rand, Vector3 x_near)
     // TODO : add conectivity checks here
     assert(kd_insert3(kd, x_new(0), x_new(1), x_new(2), 0) == 0);
     g.addVertex(x_new);
+    g.addEdge(x_near, x_new);
 
 }
 

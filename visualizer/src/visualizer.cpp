@@ -72,7 +72,7 @@ void Visualizer::publish_graph(Vertices vertices, Edges edges)
         // Add each point from sample to the marker points
         // The "points" attribute is of type geometry_msgs::Points
         geometry_msgs::Point p1,p2;
-        std::cout<<e.first<<"\n"<<e.second<<"\n";
+        // std::cout<<e.first<<"\n"<<e.second<<"\n";
         p1.x = e.first(0);
         p1.y = e.first(1);
         p1.z = e.first(2);

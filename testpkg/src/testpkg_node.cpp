@@ -3,6 +3,7 @@
 #include <ros/console.h>
 #include "visualizer/visualizer.h"
 
+
 int main(int argc, char** argv)
 {
 
@@ -30,15 +31,18 @@ int main(int argc, char** argv)
         
         rrt::clear_tree();
         points.clear();
-        for(int i =0; i <1000; i++)
+        for(int i =0; i <100; i++)
         {
             // points.push_back(rrt::random_state(v1,v2));
             rrt::step_rrt(v1, v2);
         }
+
         // sampleViz.publish_points(points);
+
         sampleViz.publish_graph(rrt::get_vertices(), rrt::get_edges());
         ros::spinOnce();
-        loop_rate.sleep();
+        // loop_rate.sleep();
+        std::cin. get();
     }
 }
 
