@@ -87,7 +87,7 @@ Vector3 rrt::new_node(Vector3 x_rand, Vector3 x_near)
     
     auto delta_y = x_rand(1) - x_near(1);
     auto delta_x = x_rand(0) - x_near(0);
-    auto yaw =  atan(delta_y/delta_x);
+    auto yaw =  atan2(delta_y,delta_x);
 
     auto new_x = x_near(0) + (dist_max * cos(yaw));
     auto new_y = x_near(1) + (dist_max * sin(yaw));

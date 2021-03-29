@@ -24,26 +24,28 @@ int main(int argc, char** argv)
 
 
     ROS_INFO("Spinning node");
-    ros::Rate loop_rate(0.5);
+    ros::Rate loop_rate(1);
     Vector3Array points;
     while(ros::ok())
     {
         
         rrt::clear_tree();
         points.clear();
-        for(int i =0; i <1000; i++)
+        for(int i =0; i <10000; i++)
         {
             // points.push_back(rrt::random_state(v1,v2));
             rrt::step_rrt(v1, v2);
-            sampleViz.publish_graph(rrt::get_vertices(), rrt::get_edges());
-            
+            // sampleViz.publish_graph(rrt::get_vertices(), rrt::get_edges());
             // loop_rate.sleep();
-            std::cin. get();
-            ros::spinOnce();
+            
+
         }
 
         // sampleViz.publish_points(points);
-
+        sampleViz.publish_graph(rrt::get_vertices(), rrt::get_edges());
+        loop_rate.sleep();
+        // std::cin. get();
+        ros::spinOnce();
 
     }
 }
