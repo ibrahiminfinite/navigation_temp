@@ -5,6 +5,12 @@ rrgraph::Graph g = rrgraph::Graph();
 kdtree *kd = kd_create(3);
 
 
+float distance(Vector3 v1, Vector3 v2)
+{
+    Vector3 res = v1 - v2;
+    return sqrt(pow(res(0),2) + pow(res(1),2) + pow(res(2),2));
+}
+
 Vector3Array rrt::get_vertices()
 {
     return g.vertices;
@@ -74,19 +80,22 @@ Vector3 rrt::new_node(Vector3 x_rand, Vector3 x_near)
 {
     bool reachable = false;
 
-    float dist_max = 5.0; // hardcoding the max dist limit for now
+    float dist_max = 1; // hardcoding the max dist limit for now
 
+    if (distance(x_rand, x_near) < dist_max)
+        return x_rand;
+    
     auto delta_y = x_rand(1) - x_near(1);
     auto delta_x = x_rand(0) - x_near(0);
     auto yaw =  atan(delta_y/delta_x);
 
-    auto new_x = dist_max * cos(yaw);
-    auto new_y = dist_max * sin(yaw);
+    auto new_x = x_near(0) + (dist_max * cos(yaw));
+    auto new_y = x_near(1) + (dist_max * sin(yaw));
 
     // TODO : add reachablity check ( obstacle checks)
     // also bounds checks to enforce the new point is within the map
-    Vector3 x_new = Vector3(new_x,new_y,x_near(2));
-    return x_new;
+
+    return Vector3(new_x,new_y,x_near(2));
 
 }
 

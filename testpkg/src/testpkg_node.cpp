@@ -12,13 +12,13 @@ int main(int argc, char** argv)
     visualizer::Visualizer sampleViz(nh); 
 
     //Graph Testing
-    auto v1 = Vector3(-50.0f,-50.0f,-50.0f);
-    auto v2 = Vector3(50.0f,50.0f,50.0f);
+    auto v1 = Vector3(-10.0f,-10.0f,-10.0f);
+    auto v2 = Vector3(10.0f,10.0f,10.0f);
 
 
     //RRT Testing    
     // rrt::random_state(v1, v2);
-    rrt::init_rrt(v1);
+    rrt::init_rrt(Vector3(0.0f,0.0f,0.0f));
     // for (int i = 0; i < 50; i++)
     //     rrt::step_rrt(v1, v2);
 
@@ -31,18 +31,20 @@ int main(int argc, char** argv)
         
         rrt::clear_tree();
         points.clear();
-        for(int i =0; i <100; i++)
+        for(int i =0; i <1000; i++)
         {
             // points.push_back(rrt::random_state(v1,v2));
             rrt::step_rrt(v1, v2);
+            sampleViz.publish_graph(rrt::get_vertices(), rrt::get_edges());
+            
+            // loop_rate.sleep();
+            std::cin. get();
+            ros::spinOnce();
         }
 
         // sampleViz.publish_points(points);
 
-        sampleViz.publish_graph(rrt::get_vertices(), rrt::get_edges());
-        ros::spinOnce();
-        // loop_rate.sleep();
-        std::cin. get();
+
     }
 }
 
