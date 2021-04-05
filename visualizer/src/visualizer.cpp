@@ -6,7 +6,7 @@ namespace visualizer
 
 Visualizer::Visualizer(const ros::NodeHandle& nh):nh_(nh)
 {
-    ROS_INFO(" Visualizer Class Initialized..");
+    //ROS_INFO(" Visualizer Class Initialized..");
     samplePointsPub = nh_.advertise<visualization_msgs::Marker>("sampled_points", 10);
     graphPub = nh_.advertise<visualization_msgs::Marker>("rrt_graph", 10);
 }
@@ -49,7 +49,7 @@ void Visualizer::publish_graph(Vertices vertices, Edges edges)
     //when there are no edges, dont try to publish, this gives seg fault
     if (edges.size() < 1 ) 
     {
-        ROS_INFO("NO EDGES !!!!");
+        //ROS_INFO("NO EDGES !!!!");
         return;
     }
     
