@@ -9,14 +9,14 @@
   void rrgraph::Graph::addVertex(Vertex v)
   {
     vertices.push_back(v);
-    ROS_INFO("Graph : Vertex added ");
+    //ROS_INFO("Graph : Vertex added ");
   }
 
 
   void rrgraph::Graph::addEdge(Vertex src, Vertex dst)
   {
     edges.push_back(Edge(src,dst));
-    ROS_INFO("Graph : Edge added ");
+    //ROS_INFO("Graph : Edge added ");
   }
 
   bool rrgraph::Graph::hasVertex(Vertex v)
@@ -34,4 +34,5 @@
   {
     vertices.clear();
     edges.clear();
+    ROS_INFO("Graph Cleared");
   }

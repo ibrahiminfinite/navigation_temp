@@ -31,4 +31,8 @@ void clear_tree();
 void init_rrt(Vector3 x_init);
 
 void step_rrt(Vector3 mins, Vector3 maxs);
+
+Vector3Array get_vertices();
+std::vector<std::pair<Vector3, Vector3>> get_edges();
+
 }
